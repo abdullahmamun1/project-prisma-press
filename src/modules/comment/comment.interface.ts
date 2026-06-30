@@ -5,7 +5,8 @@ export interface ICreateCommentPayload {
   postId: string;
 }
 export interface IUpdateCommentPayload {
-  content: string;
+  content?: string;
+  status?: CommentStatus;
 }
 export interface IModerateCommentPayload {
   status: CommentStatus;

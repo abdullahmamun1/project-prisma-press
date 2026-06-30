@@ -9,6 +9,11 @@ const createComment = async (
   payload: ICreateCommentPayload,
   authorId: string,
 ) => {
+  await prisma.post.findUnique({
+    where: {
+      id: payload.postId,
+    },
+  });
   const result = await prisma.comment.create({
     data: {
       ...payload,
@@ -22,6 +27,9 @@ const getCommentByAuthorId = async (authorId: string) => {
   const comments = await prisma.comment.findMany({
     where: {
       authorId,
+    },
+    orderBy: {
+      createdAt: "desc",
     },
     include: {
       post: {
@@ -85,7 +93,7 @@ const deleteComment = async (commentId: string, authorId: string) => {
   if (authorId !== comment.authorId) {
     throw new Error("This is not your comment!");
   }
-  const result = await prisma.comment.delete({
+  await prisma.comment.delete({
     where: {
       id: commentId,
     },

@@ -70,10 +70,7 @@ const deleteComment = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const authorId = req.user?.id;
     const { commentId } = req.params;
-    const result = await commentService.deleteComment(
-      commentId as string,
-      authorId as string,
-    );
+    await commentService.deleteComment(commentId as string, authorId as string);
     sendResponse(res, {
       success: true,
       statusCode: httpStatus.OK,
