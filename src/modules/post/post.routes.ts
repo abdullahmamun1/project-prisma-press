@@ -7,9 +7,9 @@ const router = Router();
 
 router.get("/", postController.getAllPosts);
 router.get("/my-posts", auth(Role.USER, Role.ADMIN), postController.getMyPosts);
+router.get("/stats", auth(Role.ADMIN), postController.getPostStats);
 router.get("/:postId", postController.getPostById);
 router.post("/", auth(Role.USER, Role.ADMIN), postController.createPost);
-router.get("/stats", auth(Role.ADMIN), postController.getPostStats);
 router.patch(
   "/:postId",
   auth(Role.USER, Role.ADMIN),
