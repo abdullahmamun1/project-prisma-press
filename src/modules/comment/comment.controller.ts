@@ -82,7 +82,6 @@ const deleteComment = catchAsync(
 const moderateComment = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const commentId = req.params.commentId;
-    console.log(commentId);
     const payload = req.body;
     const result = await commentService.moderateComment(
       commentId as string,
